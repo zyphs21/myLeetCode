@@ -29,4 +29,37 @@ public class AboutArray {
         }
         nums = newNums
     }
+    
+    public class func rotateArray2(_ nums: inout [Int], k: Int) {
+        guard nums.count > 0 else { return }
+        self.reverse(&nums, startIdx: 0, endIdx: nums.count - 1 - k)
+        self.reverse(&nums, startIdx: nums.count - k, endIdx: nums.count - 1)
+        self.reverse(&nums, startIdx: 0, endIdx: nums.count - 1)
+    }
+    
+    private class func reverse(_ nums: inout [Int], startIdx: Int, endIdx: Int) {
+        var startIdx = startIdx
+        var endIdx = endIdx
+        while startIdx < endIdx {
+            let temp = nums[startIdx]
+            nums[startIdx] = nums[endIdx]
+            nums[endIdx] = temp
+            startIdx += 1
+            endIdx -= 1
+        }
+    }
+    
+    
+    // MARK: - maxProfit
+    
+    public class func maxProfit(_ prices: [Int]) -> Int {
+        guard prices.count > 1 else { return 0 }
+        var sum = 0
+        for i in 1..<prices.count {
+            if prices[i] > prices[i - 1] {
+                sum += (prices[i] - prices[i - 1])
+            }
+        }
+        return sum
+    }
 }

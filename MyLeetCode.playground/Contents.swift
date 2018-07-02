@@ -10,3 +10,10 @@ testArray
 var testArray1: [Int] = [2, 5, 7, 3, 9, 8]
 AboutArray.rotateArray(&testArray1, k: 1)
 testArray1
+AboutArray.rotateArray2(&testArray1, k: 2)
+testArray1
+
+Sort.quickSort(&testArray1, left: 0, right: testArray1.count - 1)
+testArray1
+
+AboutArray.maxProfit(testArray1)
