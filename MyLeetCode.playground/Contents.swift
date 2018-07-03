@@ -25,3 +25,18 @@ AboutArray.containsDuplicate3([1,1,2,2,5,5,7])
 AboutArray.singleNumber([1,1,2,2,5,5,7])
 AboutArray.singleNumber2([1,1,2,2,5,5,7])
 AboutArray.singleNumber3([1,1,2,2,5,5,7])
+AboutArray.singleNumber4([1,1,2,2,5,5,8])
+
+AboutArray.intersect([1,1,2,2,5,5,8], [1,5,8])
+
+var dic = ["one": 10, "two": 20]
+
+//merge方法合并
+let tuples = [("one", 5), ("three", 30)]
+dic.merge(tuples, uniquingKeysWith: min)
+print("dic：\(dic)")
+
+//merging方法合并
+let dic2 = ["one": 0, "four": 40]
+let dic3 = dic.merging(dic2, uniquingKeysWith: min)
+print("dic3：\(dic3)")

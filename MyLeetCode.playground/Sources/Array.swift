@@ -5,6 +5,7 @@ public class AboutArray {
     
     
     // MARK: - Remove Duplicates From Sorted Array
+    // 给定一个排序数组，你需要在原地删除重复出现的元素，使得每个元素只出现一次，返回移除后数组的新长度。
     // https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/21/
     
     public class func removeDuplicates(_ nums: inout [Int]) -> Int {
@@ -20,6 +21,7 @@ public class AboutArray {
     }
     
     // MARK: - maxProfit
+    // 给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。
     // https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/22/
     
     public class func maxProfit(_ prices: [Int]) -> Int {
@@ -35,10 +37,12 @@ public class AboutArray {
     
     
     // MARK: - Rotate Array
+    // 给定一个数组，将数组中的元素向右移动 k 个位置，其中 k 是非负数。
     // https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/23/
     
     public class func rotateArray(_ nums: inout [Int], k: Int) {
         guard nums.count > 0 else { return }
+        // [Int](repeating: 0, count: nums.count)
         var newNums = [Int](repeating: 0, count: nums.count)
         for i in 0..<nums.count {
             newNums[(i + k) % nums.count] = nums[i]
@@ -67,6 +71,7 @@ public class AboutArray {
     
     
     // MARK: - containsDuplicate
+    // 给定一个整数数组，判断是否存在重复元素。
     // https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/24/
     
     public class func containsDuplicate(_ nums: [Int]) -> Bool {
@@ -139,5 +144,123 @@ public class AboutArray {
         return nums.reduce(0) { (res: Int, item) -> Int in
             return res ^ item
         }
+    }
+    
+    // 利用字典
+    public class func singleNumber4(_ nums: [Int]) -> Int {
+        var dic = Dictionary<Int, Int>()
+        for num in nums {
+            if let value = dic[num] {
+                dic[num] = value + 1
+            } else {
+                dic[num] = 1
+            }
+        }
+        for entry in dic {
+            if entry.value == 1 {
+                return entry.key
+            }
+        }
+        return 0
+    }
+    
+    
+    // MARK: - intersect
+    // 给定两个数组，写一个方法来计算它们的交集。
+    
+    public class func intersect(_ nums1: [Int], _ nums2: [Int]) -> [Int] {
+        var dic = Dictionary<Int, Int>()
+        for num in nums1 {
+            if let value = dic[num] {
+                dic[num] = value + 1
+            } else {
+                dic[num] = 1
+            }
+        }
+        var result = [Int]()
+        for num in nums2 {
+            if dic.keys.contains(num) && dic[num]! > 0 {
+                result.append(num)
+                dic[num] = dic[num]! - 1
+            }
+        }
+        return result
+    }
+    
+    public class func intersect2(_ nums1: [Int], _ nums2: [Int]) -> [Int] {
+        var num1 = nums1.sorted(by: <)
+        var num2 = nums2.sorted(by: <)
+        var i = 0
+        var j = 0
+        var num3 = Array<Int>()
+        
+        while i < num1.count && j < num2.count {
+            if num1[i] < num2[j] {
+                i = i + 1
+            } else if num1[i] > num2[j] {
+                j = j + 1
+            } else {
+                num3.append(num1[i])
+                i = i + 1
+                j = j + 1
+            }
+        }
+        return num3
+    }
+    
+    // [soapyigu 的解法](https://github.com/soapyigu/LeetCode-Swift/blob/master/Array/IntersectionTwoArraysII.swift)
+    public class func intersect3(_ nums1: [Int], _ nums2: [Int]) -> [Int] {
+        // Dictionary(nums1.map { ($0, 1) } , uniquingKeysWith: +)
+        var frequencies = Dictionary(nums1.map { ($0, 1) } , uniquingKeysWith: +)
+        var res = [Int]()
+        
+        for num in nums2 {
+            guard let frequent = frequencies[num] else {
+                continue
+            }
+            if frequent > 0 {
+                frequencies[num]! = frequent - 1
+                res.append(num)
+            }
+        }
+        return res
+    }
+    
+    
+    // MARK: - plusOne
+    // 加一： 给定一个非负整数组成的非空数组，在该数的基础上加一，返回一个新的数组。
+    
+    public class func plusOne(_ digits: [Int]) -> [Int] {
+        var digits = digits
+        for i in (0..<digits.count).reversed() {
+            if digits[i] < 9 {
+                digits[i] += 1
+                return digits
+            } else {
+                digits[i] = 0
+                if i == 0 {
+                    digits.insert(1, at: 0)
+                }
+            }
+        }
+        return digits
+    }
+    
+    // 网上的方法：求余后，设置一个标志位判断是否进位
+    public class func plusOne2(_ digits: [Int]) -> [Int] {
+        var digits = digits
+        var carray = 1
+        for i in (0..<digits.count).reversed() {
+            let sum = digits[i] + carray
+            //如果进位即sum = 10，digits[i] = 0
+            digits[i] = sum % 10
+            carray = sum / 10
+            //如果进位 carray = 1，不进位则为零，那么循环结束
+            if carray == 0 { return digits }
+        }
+        
+        //运行至此说明carray还是等于1，即全是9的情况，需要在首位插入数字1
+        digits.insert(1, at: 0)
+        return digits
     }
 }
