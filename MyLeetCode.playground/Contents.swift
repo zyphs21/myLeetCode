@@ -40,3 +40,6 @@ print("dic：\(dic)")
 let dic2 = ["one": 0, "four": 40]
 let dic3 = dic.merging(dic2, uniquingKeysWith: min)
 print("dic3：\(dic3)")
+
+var moveZeroesArray = [0, 1, 0, 3, 12]
+AboutArray.moveZeroes(&moveZeroesArray)

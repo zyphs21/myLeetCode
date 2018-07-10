@@ -263,4 +263,20 @@ public class AboutArray {
         digits.insert(1, at: 0)
         return digits
     }
+    
+    
+    // MARK: - Move zeroes
+    // 移动零：给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。
+    public class func moveZeroes(_ nums: inout [Int]) {
+        var j = 0
+        for i in 0..<nums.count {
+            if nums[i] != 0 {
+                let temp = nums[i]
+                nums[i] = nums[j]
+                nums[j] = temp
+                // nums.swapAt(i, j)
+                j += 1
+            }
+        }
+    }
 }
