@@ -43,3 +43,8 @@ print("dic3：\(dic3)")
 
 var moveZeroesArray = [0, 1, 0, 3, 12]
 AboutArray.moveZeroes(&moveZeroesArray)
+
+var twoSumArray = [2, 7, 11, 15]
+AboutArray.twoSum(twoSumArray, 9)
+AboutArray.twoSum2(twoSumArray, 9)
+

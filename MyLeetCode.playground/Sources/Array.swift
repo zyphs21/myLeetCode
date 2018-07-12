@@ -279,4 +279,31 @@ public class AboutArray {
             }
         }
     }
+    
+    
+    // MARK: - TwoSum
+    // 给定一个整数数组和一个目标值，找出数组中和为目标值的两个数。
+    public class func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
+        for i in 0..<nums.count {
+            for j in (i + 1)..<nums.count {
+                if nums[i] + nums[j] == target {
+                    return [i, j]
+                }
+            }
+        }
+        return []
+    }
+    
+    // hashtable来保存与之契合的数
+    public class func twoSum2(_ nums: [Int], _ target: Int) -> [Int] {
+        var map = Dictionary<Int, Int>()
+        for i in 0..<nums.count {
+            if let value = map[nums[i]] {
+                return [i, value]
+            } else {
+                map[target - nums[i]] = i
+            }
+        }
+        return []
+    }
 }
