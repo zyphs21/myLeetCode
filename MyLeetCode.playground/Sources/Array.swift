@@ -127,7 +127,7 @@ public class AboutArray {
     // a ^ b ^ c = a ^ (b ^ c) = (a ^ b) ^ c
     // 1 ⊕ 0 = 1; 0 ⊕ 1 = 1; 1 ⊕ 1 = 0; 0 ⊕ 0 = 0
     //  (a^a) ^ (b^b) ^ c = 0 ^ 0 ^ c = c
-    // 两个相同数 ^(异或运算)为 0
+    // 两个相同数 ^(异或运算)为 0； 任何数与0 ^(异或运算) 为0
     // 两个相同数字做 & 运算得到相同的数； 两个相同数字做 | 运算得到相同的数
     
     public class func singleNumber2(_ nums: [Int]) -> Int {
@@ -307,6 +307,7 @@ public class AboutArray {
         return []
     }
     
+    
     // MARK: - isValidSudoku
     // 判断一个 9x9 的数独是否有效
     public class func isValidSudoku(_ board: [[Character]]) -> Bool {
@@ -348,5 +349,44 @@ public class AboutArray {
             }
         }
         return true
+    }
+    
+    
+    // MARK: - Rotate
+    // 给定一个 n × n 的二维矩阵表示一个图像。将图像顺时针旋转 90 度。
+    
+    //    1  2  3       7  2  1        7  4  1
+    //    4  5  6  -->  4  5  6　-->   8  5  2
+    //    7  8  9       9  8  3　　　　 9  6  3
+    public class func rotate(_ matrix: inout [[Int]]) {
+        let length = matrix.count
+        for i in 0..<length/2 {
+            for j in i..<length - 1 - i {
+                let temp = matrix[i][j]
+                matrix[i][j] = matrix[length - 1 - j][i]
+                matrix[length - 1 - j][i] = matrix[length - 1 - i][length - 1 - j]
+                matrix[length - 1 - i][length - 1 - j] = matrix[j][length - 1 - i]
+                matrix[j][length - 1 - i] = temp
+            }
+        }
+    }
+    
+    // 用一个新的数组空间
+    public class func rotate2(_ matrix: inout [[Int]]) {
+        let tempMatrix = matrix
+        for i in 0..<matrix.count {
+            for j in 0..<matrix.count {
+                matrix[i][j] = tempMatrix[matrix.count - 1 - j][i]
+            }
+        }
+//        let t = matrix
+//        let n = matrix.count - 1
+//        for i in 0..<t.count {
+//            let arr: [Int] = t[i]
+//            for j in 0..<arr.count
+//            {
+//                matrix[i][j] = t[n-j][i]
+//            }
+//        }
     }
 }
