@@ -306,4 +306,47 @@ public class AboutArray {
         }
         return []
     }
+    
+    // MARK: - isValidSudoku
+    // 判断一个 9x9 的数独是否有效
+    public class func isValidSudoku(_ board: [[Character]]) -> Bool {
+        var rowSet = Set<Character>()
+        var columnSet = Set<Character>()
+        for i in 0..<9 {
+            // 注意要清空
+            rowSet.removeAll()
+            columnSet.removeAll()
+            for j in 0..<9 {
+                // board[i][j]是行
+                if board[i][j] != "." {
+                    if rowSet.contains(board[i][j]) {
+                        return false
+                    }
+                    rowSet.insert(board[i][j])
+                }
+                // board[j][i]是列
+                if board[j][i] != "." {
+                    if columnSet.contains(board[j][i]) {
+                        return false
+                    }
+                    columnSet.insert(board[j][i])
+                }
+                // blockSet 一个九宫
+                if i % 3 == 0 && j % 3 == 0 {
+                    var blockSet = Set<Character>()
+                    for r in i..<(i + 3) {
+                        for c in j..<(j + 3) {
+                            if board[r][c] != "." {
+                                if blockSet.contains(board[r][c]) {
+                                    return false
+                                }
+                                blockSet.insert(board[r][c])
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return true
+    }
 }
