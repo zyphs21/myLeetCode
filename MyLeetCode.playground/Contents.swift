@@ -56,3 +56,23 @@ AboutArray.rotate2(&matrix)
 var matrix2: [[Int]] = [[1,2,3,4], [5,6,7,8], [9,10,11,12], [13,14,15,16]]
 AboutArray.rotate2(&matrix2)
 
+var rotateString = "hell"
+var arrayString = [String]()
+for char in rotateString {
+    arrayString.append("\(char)")
+}
+var left = 0
+var right = arrayString.count - 1
+while left < right {
+    let temp = arrayString[left]
+    arrayString[left] = arrayString[right]
+    arrayString[right] = temp
+    left += 1
+    right -= 1
+}
+arrayString.joined()
+
+AboutString.reverse32Int(-918)
+Int32.min
+
+
