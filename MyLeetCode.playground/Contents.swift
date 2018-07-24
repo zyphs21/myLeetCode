@@ -75,4 +75,6 @@ arrayString.joined()
 AboutString.reverse32Int(-918)
 Int32.min
 
+AboutString.firstUniqChar("hhello")
+
 

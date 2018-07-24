@@ -52,4 +52,24 @@ public class AboutString {
         }
         return j
     }
+    
+    
+    // MARK: - 字符串中的第一个唯一字符
+    public class func firstUniqChar(_ s: String) -> Int {
+        var dics = Dictionary<Character, Int>()
+        let array = Array(s)
+        for i in array.indices {
+            if let data = dics[array[i]] {
+                dics[array[i]] = data + 1
+            } else {
+                dics[array[i]] = 0
+            }
+        }
+        for i in array.indices {
+            if dics[array[i]] == 0 {
+                return i
+            }
+        }
+        return -1
+    }
 }
