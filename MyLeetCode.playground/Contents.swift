@@ -75,6 +75,26 @@ arrayString.joined()
 AboutString.reverse32Int(-918)
 Int32.min
 
-AboutString.firstUniqChar("hhello")
+AboutString.firstUniqChar2("hhello")
 
+// 删除在另一个字符串中出现的字符
+public func removeString(from: String, with: String) {
+    var tempMap: [Character: Bool] = [:]
+    var fromStringArray = Array(from)
+    var withStringArray = Array(with)
+    for i in fromStringArray.indices {
+        tempMap[fromStringArray[i]] = false
+    }
+    for i in withStringArray.indices {
+        if let _ = tempMap[withStringArray[i]] {
+            tempMap[withStringArray[i]]! = true
+        }
+    }
+    for i in fromStringArray.indices {
+        if !tempMap[fromStringArray[i]]! {
+            print(fromStringArray[i])
+        }
+    }
+}
 
+removeString(from: "helloworld", with: "eo")

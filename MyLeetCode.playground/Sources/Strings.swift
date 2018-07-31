@@ -72,4 +72,28 @@ public class AboutString {
         }
         return -1
     }
+    // 别人的解答：
+    public class func firstUniqChar2(_ s: String) -> Int {
+        typealias ResultItem = (count: Int, position: Int)
+        let asciiOffset = 97
+        let defaultPair = (count: 0, position: 0)
+        var search = Array<ResultItem>(repeatElement(defaultPair, count: 26))
+        
+        for (i, c) in s.unicodeScalars.enumerated() where c.isASCII{
+            let idx = Int(c.value) - asciiOffset
+            if idx < 0 || idx >= 26 {
+                continue
+            }
+            search[idx].count += 1
+            search[idx].position = i
+        }
+        
+        let found = search.lazy
+            .filter({ $0.count == 1 })
+            .sorted(by: { $0.position < $1.position })
+            .flatMap({ $0.position })
+            .first ?? -1
+        
+        return found
+    }
 }
