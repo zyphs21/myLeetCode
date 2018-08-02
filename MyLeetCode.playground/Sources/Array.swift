@@ -38,6 +38,7 @@ public class AboutArray {
     
     // MARK: - Rotate Array
     // 给定一个数组，将数组中的元素向右移动 k 个位置，其中 k 是非负数。
+    // 右旋问题(如果遇到左旋问题，可以转化为右旋：count-leftRotateNum)
     // https://leetcode-cn.com/explore/interview/card/top-interview-questions-easy/1/array/23/
     
     public class func rotateArray(_ nums: inout [Int], k: Int) {
@@ -187,6 +188,7 @@ public class AboutArray {
         return result
     }
     
+    // 先从升序排序，然后比较
     public class func intersect2(_ nums1: [Int], _ nums2: [Int]) -> [Int] {
         var num1 = nums1.sorted(by: <)
         var num2 = nums2.sorted(by: <)

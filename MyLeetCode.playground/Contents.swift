@@ -78,7 +78,7 @@ Int32.min
 AboutString.firstUniqChar2("hhello")
 
 // 删除在另一个字符串中出现的字符
-public func removeString(from: String, with: String) {
+public func removeString(from: String, with: String) -> String {
     var tempMap: [Character: Bool] = [:]
     var fromStringArray = Array(from)
     var withStringArray = Array(with)
@@ -90,11 +90,28 @@ public func removeString(from: String, with: String) {
             tempMap[withStringArray[i]]! = true
         }
     }
+    var result: String = ""
     for i in fromStringArray.indices {
         if !tempMap[fromStringArray[i]]! {
-            print(fromStringArray[i])
+            result.append(fromStringArray[i])
         }
     }
+    return result
 }
 
 removeString(from: "helloworld", with: "eo")
+
+// 左旋问题可以转化为右旋
+public func moveLeft(_ array: [Int], _ moveNum: Int) -> [Int] {
+    var tempArray = [Int](repeating: 0, count: array.count)
+    for i in array.indices {
+        let rightMove = array.count - moveNum
+        tempArray[(i + rightMove) % array.count] = array[i]
+    }
+    return tempArray
+}
+
+var testArray5 = [1, 4, 5, 7]
+moveLeft(testArray5, 2)
+
+pow(3, 3)
