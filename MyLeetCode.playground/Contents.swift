@@ -105,6 +105,7 @@ removeString(from: "helloworld", with: "eo")
 public func moveLeft(_ array: [Int], _ moveNum: Int) -> [Int] {
     var tempArray = [Int](repeating: 0, count: array.count)
     for i in array.indices {
+        // 转为右旋
         let rightMove = array.count - moveNum
         tempArray[(i + rightMove) % array.count] = array[i]
     }
@@ -115,3 +116,22 @@ var testArray5 = [1, 4, 5, 7]
 moveLeft(testArray5, 2)
 
 pow(3, 3)
+
+
+// Swift 进制转换
+
+// n进制转换为10进制
+
+func transferToDecimalism(_ num: Int, originDecimal: Int) -> Int {
+    var numString = String(num)
+    var value = 0
+    while numString.count > 0 {
+        let i = Int(String(numString.first!))
+        let begin = numString.index(numString.startIndex, offsetBy: 1)
+        numString = String(numString[begin...])
+        value = value + i! * Int(pow(Double(originDecimal), Double(numString.count)))
+    }
+    return value
+}
+
+transferToDecimalism(112, originDecimal: 8)
